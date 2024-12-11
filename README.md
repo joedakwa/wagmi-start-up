@@ -26,6 +26,10 @@ npm i @wagmi/cli
 
 (Make sure you have an ETH API KEY in your .env file)
 
+BEFORE you run the below command, you need to have deployed your contracts and imported the ABI into the WAGMI.CONFIG.TS file.
+
+Refereced here: https://wagmi.sh/cli/getting-started
+
 ```
 npx wagmi generate
 ```
