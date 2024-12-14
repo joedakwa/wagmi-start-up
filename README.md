@@ -12,6 +12,71 @@ from scratch.
 Once complete, run ```npm i``` inside the project
 then you can start the project in browser by running ```npm run dev```
 
+Let's install RainbowKit. It is an easy to use library to help developers easily allow their users to connect to your dApps with all sorts of different wallets. By default RainbowKit supports injected providers like Metamask, Rainbow, Coinbase Wallet, WalletConnect etc. Open up a terminal pointing to your directory and execute this command to install RainbowKit and its peer dependencies.
+
+```npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query```
+
+In your main app page, perhaps within next.js its "app.ts" you could import the above libraries like this
+
+```
+"use client";
+
+import * as React from "react";
+import {
+  RainbowKitProvider,
+  getDefaultWallets,
+  getDefaultConfig,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
+
+import {
+  argentWallet,
+  trustWallet,
+  ledgerWallet,
+} from "@rainbow-me/rainbowkit/wallets";
+
+//importing the chains we need (here, just Sepolia)
+import {
+  sepolia
+} from "wagmi/chains";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+
+const { wallets } = getDefaultWallets();
+
+export const config = getDefaultConfig({
+  appName: "ENS dapp",
+  projectId: "YOUR_PROJECT_ID",
+  // the above value needs to be replaced
+  wallets: [
+    ...wallets,
+    {
+      groupName: "Other",
+      wallets: [argentWallet, trustWallet, ledgerWallet],
+    },
+  ],
+  chains: [
+   sepolia
+  ],
+  ssr: true,
+});
+
+// TanStack Query is a library that makes it very easy to fetch, cache and handle data.
+// It gives you declarative, always-up-to-date auto-managed queries and mutations.
+export const queryClient = new QueryClient();
+
+export function Providers({ children }) {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider theme={darkTheme()}>{children}</RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+}
+```
+
+
 # Install Wagmi CLI
 
 ```
