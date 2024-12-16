@@ -18,6 +18,8 @@ Let's install RainbowKit. It is an easy to use library to help developers easily
 
 In your main app page, perhaps within next.js its "app.ts" you could import the above libraries like this.
 
+Compare with https://github.com/joedakwa/CryptoDAO-Wagmi for clarity on boilerplate.
+
 DONT forget to visit https://cloud.reown.com/sign-in and create a project, then grab the project Id and place it over ```"projectId: "YOUR_PROJECT_ID",``` below
 
 ```
