@@ -16,7 +16,9 @@ Let's install RainbowKit. It is an easy to use library to help developers easily
 
 ```npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query```
 
-In your main app page, perhaps within next.js its "app.ts" you could import the above libraries like this
+In your main app page, perhaps within next.js its "app.ts" you could import the above libraries like this.
+
+DONT forget to visit https://cloud.reown.com/sign-in and create a project, then grab the project Id and place it over ```"projectId: "YOUR_PROJECT_ID",``` below
 
 ```
 "use client";
@@ -47,7 +49,7 @@ const { wallets } = getDefaultWallets();
 export const config = getDefaultConfig({
   appName: "ENS dapp",
   projectId: "YOUR_PROJECT_ID",
-  // the above value needs to be replaced
+  // the above value needs to be replaced. You can do this here: https://cloud.reown.com/sign-in
   wallets: [
     ...wallets,
     {
