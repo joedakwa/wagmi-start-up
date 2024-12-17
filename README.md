@@ -16,6 +16,21 @@ Let's install RainbowKit. It is an easy to use library to help developers easily
 
 ```npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query```
 
+The Webpack v5 bundler used by Next.js and Create React App no longer provides Node polyfills, so we’ll need to include these modules ourselves to satisfy RainbowKit's peer dependencies. So, rename next.config.mjs to next.config.js and open it. Replace its contents with the following code:
+
+```
+const nextConfig = {
+    reactStrictMode: true,
+    webpack: config => {
+      config.resolve.fallback = { fs: false, net: false, tls: false };
+      config.externals.push('pino-pretty', 'lokijs', 'encoding');
+      return config;
+    }
+  };
+
+  module.exports = nextConfig;
+```
+
 In your main app page, perhaps within next.js its "app.ts" you could import the above libraries like this.
 
 Compare with https://github.com/joedakwa/CryptoDAO-Wagmi for clarity on boilerplate.
